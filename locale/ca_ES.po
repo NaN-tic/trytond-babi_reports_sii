@@ -1,0 +1,205 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "model:babi.dimension,name:estate_issued_invoices_taxes__description"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt ""
+"model:babi.dimension,name:estate_received_invoices_taxes__description"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "model:babi.dimension,name:subject_sii_invoice__date"
+msgid "Date"
+msgstr "Data"
+
+msgctxt "model:babi.dimension,name:subject_sii_invoice__description"
+msgid "Invoice"
+msgstr "Factura"
+
+msgctxt "model:babi.dimension,name:summary_invoices_state__date"
+msgid "Invoice Date"
+msgstr "Data factura"
+
+msgctxt "model:babi.dimension,name:summary_invoices_state__number"
+msgid "Invoice Number"
+msgstr "Número de factura"
+
+msgctxt "model:babi.dimension,name:summary_invoices_state__state"
+msgid "Invoice State"
+msgstr "Estat factura"
+
+msgctxt "model:babi.dimension,name:tryton_issued_invoices_taxes__description"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt ""
+"model:babi.dimension,name:tryton_received_invoices_taxes__description"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "model:babi.expression,name:invoice_amount"
+msgid "Amount"
+msgstr "Import"
+
+msgctxt "model:babi.expression,name:invoice_date"
+msgid "Invoice Date"
+msgstr "Data factura"
+
+msgctxt "model:babi.expression,name:invoice_number"
+msgid "Invoice Number"
+msgstr "Número de factura"
+
+msgctxt "model:babi.expression,name:invoice_state"
+msgid "Invoice State"
+msgstr "Estat factura"
+
+msgctxt "model:babi.expression,name:invoice_tax_base"
+msgid "Base"
+msgstr "Base"
+
+msgctxt "model:babi.expression,name:invoice_tax_base_"
+msgid "Base"
+msgstr "Base"
+
+msgctxt "model:babi.expression,name:invoice_tax_description"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "model:babi.expression,name:invoice_tax_description_"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "model:babi.expression,name:invoice_tax_tax"
+msgid "Tax"
+msgstr "Impost"
+
+msgctxt "model:babi.expression,name:invoice_tax_tax_"
+msgid "Tax"
+msgstr "Impost"
+
+msgctxt "model:babi.expression,name:subject_invoice_amount"
+msgid "Total Amount"
+msgstr "Import total"
+
+msgctxt "model:babi.filter,name:invoice_detection_subject_sii"
+msgid "Invoice detection with \"Subject\" notice of the SII"
+msgstr "Detecció factura(s) amb avís \"Subjecta\" del SII"
+
+msgctxt "model:babi.filter,name:issued_invoices_taxes"
+msgid "Tryton Issued Invoice Taxes"
+msgstr "Impostos Factures emeses en Tryton"
+
+msgctxt "model:babi.filter,name:issued_invoices_taxes_estate"
+msgid "Estate Issued Invoice Taxes"
+msgstr "Impostos Factures emeses en Hisenda"
+
+msgctxt "model:babi.filter,name:received_invoices_taxes"
+msgid "Tryton Received Invoice Taxes"
+msgstr "Impostos Factures rebudes en Tryton"
+
+msgctxt "model:babi.filter,name:received_invoices_taxes_estate"
+msgid "Estate Received Invoice Taxes"
+msgstr "Impostos Factures rebudes en Hisenda"
+
+msgctxt "model:babi.filter,name:summary_invoices_not_correct_state"
+msgid ""
+"Invoices that are in the summary of the SII but its state in tryton is not "
+"correct"
+msgstr ""
+"Factures que estan en el resum del SII però que el seu estat a Tryton no és "
+"correcte"
+
+msgctxt "model:babi.filter.parameter,name:invoice_detection_subject_sii_book"
+msgid "Libro"
+msgstr "Libro"
+
+msgctxt "model:babi.filter.parameter,name:issued_invoices_taxes_book"
+msgid "Libro"
+msgstr "Libro"
+
+msgctxt "model:babi.filter.parameter,name:issued_invoices_taxes_period"
+msgid "Periodo"
+msgstr "Periodo"
+
+msgctxt "model:babi.filter.parameter,name:received_invoices_taxes_book"
+msgid "Libro"
+msgstr "Libro"
+
+msgctxt "model:babi.filter.parameter,name:received_invoices_taxes_period"
+msgid "Periodo"
+msgstr "Periodo"
+
+msgctxt "model:babi.filter.parameter,name:summary_book"
+msgid "Libro"
+msgstr "Libro"
+
+msgctxt "model:babi.measure,name:estate_issued_invoices_taxes_base"
+msgid "Base"
+msgstr "Base"
+
+msgctxt "model:babi.measure,name:estate_issued_invoices_taxes_tax"
+msgid "Tax"
+msgstr "Impost"
+
+msgctxt "model:babi.measure,name:estate_received_invoices_taxes_base"
+msgid "Base"
+msgstr "Base"
+
+msgctxt "model:babi.measure,name:estate_received_invoices_taxes_tax"
+msgid "Tax"
+msgstr "Impost"
+
+msgctxt "model:babi.measure,name:subject_sii_invoice_amount"
+msgid "Total Amount"
+msgstr "Import total"
+
+msgctxt "model:babi.measure,name:summary_invoices_state_amount"
+msgid "Amount"
+msgstr "Import"
+
+msgctxt "model:babi.measure,name:tryton_issued_invoices_taxes_base"
+msgid "Base"
+msgstr "Base"
+
+msgctxt "model:babi.measure,name:tryton_issued_invoices_taxes_tax"
+msgid "Tax"
+msgstr "Impost"
+
+msgctxt "model:babi.measure,name:tryton_received_invoices_taxes_base"
+msgid "Base"
+msgstr "Base"
+
+msgctxt "model:babi.measure,name:tryton_received_invoices_taxes_tax"
+msgid "Tax"
+msgstr "Impost"
+
+msgctxt "model:babi.report,name:estate_issued_invoices_taxes"
+msgid "Estate Issued Invoice Taxes"
+msgstr "Impostos Factures emeses en Hisenda"
+
+msgctxt "model:babi.report,name:estate_received_invoices_taxes"
+msgid "Estate Received Invoice Taxes"
+msgstr "Impostos Factures rebudes en Hisenda"
+
+msgctxt "model:babi.report,name:subject_sii_invoice"
+msgid "Invoice detection with \"Subject\" notice of the SII"
+msgstr "Detecció factura(s) amb avís \"Subjecta\" del SII"
+
+msgctxt "model:babi.report,name:summary_invoices_state"
+msgid ""
+"Invoices that are in the summary of the SII but its state in tryton is not "
+"correct"
+msgstr ""
+"Factures que estan en el resum del SII però que el seu estat a Tryton no és "
+"correcte"
+
+msgctxt "model:babi.report,name:tryton_issued_invoices_taxes"
+msgid "Tryton Issued Invoice Taxes"
+msgstr "Impostos Factures emeses en Tryton"
+
+msgctxt "model:babi.report,name:tryton_received_invoices_taxes"
+msgid "Tryton Received Invoice Taxes"
+msgstr "Impostos Factures rebudes en Tryton"
