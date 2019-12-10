@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tryton>
+    <data>
+        <!-- Invoices that are in the summary of the SII but its state in tryton is not correct -->
+        <!-- Filters -->
+        <record model="babi.filter" id="summary_invoices_not_correct_state">
+            <field name="name">Invoices that are in the summary of the SII but its state in tryton is not correct</field>
+            <field name="model" search="[('model', '=', 'aeat.sii.report.lines')]"/>
+            <field name="domain">[('report', '=', {Libro}), ('state', 'in', ['Correcta', 'AceptadaConErrores']), ('invoice', '!=', None), ('invoice.state', 'not in', ['posted', 'paid'])]</field>
+        </record>
+
+        <!-- Parameters -->
+        <record model="babi.filter.parameter" id="summary_book">
+            <field name="name">Libro</field>
+            <field name="ttype">integer</field>
+            <field name="filter" ref="summary_invoices_not_correct_state"/>
+        </record>
+
+        <!-- Expressions -->
+        <record model="babi.expression" id="invoice_date">
+          <field name="ttype">char</field>
+          <field name="model" search="[('model','=','aeat.sii.report.lines')]"/>
+          <field name="expression">o.invoice.invoice_date if o.invoice else ''</field>
+          <field name="name">Invoice Date</field>
+        </record>
+        <record model="babi.expression" id="invoice_state">
+          <field name="ttype">char</field>
+          <field name="model" search="[('model','=','aeat.sii.report.lines')]"/>
+          <field name="expression">o.invoice.state if o.invoice else ''</field>
+          <field name="name">Invoice State</field>
+        </record>
+        <record model="babi.expression" id="invoice_amount">
+          <field name="ttype">numeric</field>
+          <field name="model" search="[('model','=','aeat.sii.report.lines')]"/>
+          <field name="expression">o.total_amount</field>
+          <field name="name">Amount</field>
+        </record>
+        <record model="babi.expression" id="invoice_number">
+          <field name="ttype">char</field>
+          <field name="model" search="[('model','=','aeat.sii.report.lines')]"/>
+          <field name="expression">o.invoice.number if o.invoice else ''</field>
+          <field name="name">Invoice Number</field>
+        </record>
+
+        <!-- Report -->
+        <record model="babi.report" id="summary_invoices_state">
+            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+            <field name="model" search="[('model','=','aeat.sii.report.lines')]"/>
+            <field name="filter" ref="summary_invoices_not_correct_state"/>
+            <field name="name">Invoices that are in the summary of the SII but its state in tryton is not correct</field>
+            <field name="timeout" eval="1200"/>
+        </record>
+        <record model="babi.report-res.group" id="tryton_summary_invoices_group_babi">
+            <field name="report" ref="summary_invoices_state"/>
+            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        </record>
+        <record model="babi.dimension" id="summary_invoices_state__date">
+            <field name="report" ref="summary_invoices_state"/>
+            <field name="expression" ref="invoice_date"/>
+            <field name="name">Invoice Date</field>
+            <field name="sequence">1</field>
+            <field name="group_by">True</field>
+        </record>
+        <record model="babi.dimension" id="summary_invoices_state__state">
+            <field name="report" ref="summary_invoices_state"/>
+            <field name="expression" ref="invoice_state"/>
+            <field name="name">Invoice State</field>
+            <field name="sequence">2</field>
+            <field name="group_by">True</field>
+        </record>
+        <record model="babi.dimension" id="summary_invoices_state__number">
+            <field name="report" ref="summary_invoices_state"/>
+            <field name="expression" ref="invoice_number"/>
+            <field name="name">Invoice Number</field>
+            <field name="sequence">3</field>
+            <field name="group_by">False</field>
+        </record>
+        <record model="babi.measure" id="summary_invoices_state_amount">
+            <field name="report" ref="summary_invoices_state"/>
+            <field name="expression" ref="invoice_amount"/>
+            <field name="name">Amount</field>
+            <field name="aggregate">sum</field>
+            <field name="sequence">5</field>
+        </record>
+
+        <!-- 5 - Tryton Issued Invoice Taxes -->
+        <!-- Filters -->
+        <record model="babi.filter" id="issued_invoices_taxes">
+            <field name="name">Tryton Issued Invoice Taxes</field>
+            <field name="model" search="[('model', '=', 'account.invoice.tax')]"/>
+            <field name="domain">[('invoice.state', 'in', ['posted', 'paid']), ('invoice.type', 'in', ['out_invoice', 'out_credit_note']), ('invoice.move.period', '=', {Periodo})]</field>
+        </record>
+
+        <!-- Parameters -->
+        <record model="babi.filter.parameter" id="issued_invoices_taxes_period">
+            <field name="name">Periodo</field>
+            <field name="ttype">many2one</field>
+            <field name="filter" ref="issued_invoices_taxes"/>
+            <field name="related_model" search="[('model', '=', 'account.period')]"/>
+        </record>
+
+        <!-- Expressions -->
+        <record model="babi.expression" id="invoice_tax_description">
+          <field name="ttype">char</field>
+          <field name="model" search="[('model','=','account.invoice.tax')]"/>
+          <field name="expression">o.description</field>
+          <field name="name">Description</field>
+        </record>
+        <record model="babi.expression" id="invoice_tax_base">
+          <field name="ttype">numeric</field>
+          <field name="model" search="[('model','=','account.invoice.tax')]"/>
+          <field name="expression">o.base_sign * (o.base if o.invoice.currency == 24 else o.company_base)</field>
+          <field name="name">Base</field>
+        </record>
+        <record model="babi.expression" id="invoice_tax_tax">
+          <field name="ttype">numeric</field>
+          <field name="model" search="[('model','=','account.invoice.tax')]"/>
+          <field name="expression">o.tax_sign * (o.amount if o.invoice.currency == 24 else o.company_amount)</field>
+          <field name="name">Tax</field>
+        </record>
+
+        <!-- Report -->
+        <record model="babi.report" id="tryton_issued_invoices_taxes">
+            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+            <field name="model" search="[('model','=','account.invoice.tax')]"/>
+            <field name="filter" ref="issued_invoices_taxes"/>
+            <field name="name">Tryton Issued Invoice Taxes</field>
+            <field name="timeout" eval="1200"/>
+        </record>
+        <record model="babi.report-res.group" id="tryton_issued_invoices_taxes_group_babi">
+            <field name="report" ref="tryton_issued_invoices_taxes"/>
+            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        </record>
+        <record model="babi.dimension" id="tryton_issued_invoices_taxes__description">
+            <field name="report" ref="tryton_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_description"/>
+            <field name="name">Description</field>
+            <field name="sequence">1</field>
+        </record>
+        <record model="babi.measure" id="tryton_issued_invoices_taxes_base">
+            <field name="report" ref="tryton_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_base"/>
+            <field name="name">Base</field>
+            <field name="aggregate">sum</field>
+        </record>
+        <record model="babi.measure" id="tryton_issued_invoices_taxes_tax">
+            <field name="report" ref="tryton_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_tax"/>
+            <field name="name">Tax</field>
+            <field name="aggregate">sum</field>
+        </record>
+
+        <!-- 5 - Tryton Received Invoice Taxes -->
+        <!-- Filters -->
+        <record model="babi.filter" id="received_invoices_taxes">
+            <field name="name">Tryton Received Invoice Taxes</field>
+            <field name="model" search="[('model', '=', 'account.invoice.tax')]"/>
+            <field name="domain">[('invoice.state', 'in', ['posted', 'paid']), ('invoice.type', 'in', ['in_invoice', 'in_credit_note']), ('invoice.move.period', '=', {Periodo})]</field>
+        </record>
+
+        <!-- Parameters -->
+        <record model="babi.filter.parameter" id="received_invoices_taxes_period">
+            <field name="name">Periodo</field>
+            <field name="ttype">many2one</field>
+            <field name="filter" ref="received_invoices_taxes"/>
+            <field name="related_model" search="[('model', '=', 'account.period')]"/>
+        </record>
+
+        <!-- Report -->
+        <record model="babi.report" id="tryton_received_invoices_taxes">
+            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+            <field name="model" search="[('model','=','account.invoice.tax')]"/>
+            <field name="filter" ref="received_invoices_taxes"/>
+            <field name="name">Tryton Received Invoice Taxes</field>
+            <field name="timeout" eval="1200"/>
+        </record>
+        <record model="babi.report-res.group"
+                id="tryton_received_invoices_taxes_group_babi">
+            <field name="report" ref="tryton_received_invoices_taxes"/>
+            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        </record>
+        <record model="babi.dimension" id="tryton_received_invoices_taxes__description">
+            <field name="report" ref="tryton_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_description"/>
+            <field name="name">Description</field>
+            <field name="sequence">1</field>
+        </record>
+        <record model="babi.measure" id="tryton_received_invoices_taxes_base">
+            <field name="report" ref="tryton_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_base"/>
+            <field name="name">Base</field>
+            <field name="aggregate">sum</field>
+        </record>
+        <record model="babi.measure" id="tryton_received_invoices_taxes_tax">
+            <field name="report" ref="tryton_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_tax"/>
+            <field name="name">Tax</field>
+            <field name="aggregate">sum</field>
+        </record>
+
+        <!-- 6 - Estate Issued Invoice Taxes -->
+        <!-- Filters -->
+        <record model="babi.filter" id="issued_invoices_taxes_estate">
+            <field name="name">Estate Issued Invoice Taxes</field>
+            <field name="model" search="[('model', '=', 'aeat.sii.report.line.tax')]"/>
+            <field name="domain">[('line.report', '=', {Libro}), ('line.state', 'in', ['Correcta', 'AceptadaConErrores'])]</field>
+        </record>
+
+        <!-- Parameters -->
+        <record model="babi.filter.parameter" id="issued_invoices_taxes_book">
+            <field name="name">Libro</field>
+            <field name="ttype">integer</field>
+            <field name="filter" ref="issued_invoices_taxes_estate"/>
+        </record>
+
+        <!-- Expressions -->
+        <record model="babi.expression" id="invoice_tax_description_">
+          <field name="ttype">char</field>
+          <field name="model" search="[('model','=','aeat.sii.report.line.tax')]"/>
+          <field name="expression">o.rate</field>
+          <field name="name">Description</field>
+        </record>
+        <record model="babi.expression" id="invoice_tax_base_">
+          <field name="ttype">numeric</field>
+          <field name="model" search="[('model','=','aeat.sii.report.line.tax')]"/>
+          <field name="expression">o.base</field>
+          <field name="name">Base</field>
+        </record>
+        <record model="babi.expression" id="invoice_tax_tax_">
+          <field name="ttype">numeric</field>
+          <field name="model" search="[('model','=','aeat.sii.report.line.tax')]"/>
+          <field name="expression">o.amount</field>
+          <field name="name">Tax</field>
+        </record>
+
+        <!-- Report -->
+        <record model="babi.report" id="estate_issued_invoices_taxes">
+            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+            <field name="model" search="[('model','=','aeat.sii.report.line.tax')]"/>
+            <field name="filter" ref="issued_invoices_taxes_estate"/>
+            <field name="name">Estate Issued Invoice Taxes</field>
+            <field name="timeout" eval="1200"/>
+        </record>
+        <record model="babi.report-res.group" id="estate_received_invoices_taxes_group_babi">
+            <field name="report" ref="estate_issued_invoices_taxes"/>
+            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        </record>
+        <record model="babi.dimension" id="estate_issued_invoices_taxes__description">
+            <field name="report" ref="estate_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_description_"/>
+            <field name="name">Description</field>
+            <field name="sequence">1</field>
+        </record>
+        <record model="babi.measure" id="estate_issued_invoices_taxes_base">
+            <field name="report" ref="estate_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_base_"/>
+            <field name="name">Base</field>
+            <field name="aggregate">sum</field>
+        </record>
+        <record model="babi.measure" id="estate_issued_invoices_taxes_tax">
+            <field name="report" ref="estate_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_tax_"/>
+            <field name="name">Tax</field>
+            <field name="aggregate">sum</field>
+        </record>
+
+        <!-- 6 - Estate Received Invoice Taxes -->
+        <!-- Filters -->
+        <record model="babi.filter" id="received_invoices_taxes_estate">
+            <field name="name">Estate Received Invoice Taxes</field>
+            <field name="model" search="[('model', '=', 'aeat.sii.report.line.tax')]"/>
+            <field name="domain">[('line.report', '=', {Libro}), ('line.state', 'in', ['Correcta', 'AceptadaConErrores'])]</field>
+        </record>
+
+        <!-- Parameters -->
+        <record model="babi.filter.parameter" id="received_invoices_taxes_book">
+            <field name="name">Libro</field>
+            <field name="ttype">integer</field>
+            <field name="filter" ref="received_invoices_taxes_estate"/>
+        </record>
+
+        <!-- Report-->
+        <record model="babi.report" id="estate_received_invoices_taxes">
+            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+            <field name="model" search="[('model','=','aeat.sii.report.line.tax')]"/>
+            <field name="filter" ref="received_invoices_taxes_estate"/>
+            <field name="name">Estate Received Invoice Taxes</field>
+            <field name="timeout" eval="1200"/>
+        </record>
+        <record model="babi.report-res.group"
+                id="estate_received_invoices_taxes_group_babi_">
+            <field name="report" ref="estate_received_invoices_taxes"/>
+            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        </record>
+        <record model="babi.dimension" id="estate_received_invoices_taxes__description">
+            <field name="report" ref="estate_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_description_"/>
+            <field name="name">Description</field>
+            <field name="sequence">1</field>
+        </record>
+        <record model="babi.measure" id="estate_received_invoices_taxes_base">
+            <field name="report" ref="estate_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_base_"/>
+            <field name="name">Base</field>
+            <field name="aggregate">sum</field>
+        </record>
+        <record model="babi.measure" id="estate_received_invoices_taxes_tax">
+            <field name="report" ref="estate_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_tax_"/>
+            <field name="name">Tax</field>
+            <field name="aggregate">sum</field>
+        </record>
+    </data>
+
+    <data>
+        <!-- Invoice detection with "Subject" notice of the SII -->
+        <!-- Filters -->
+        <record model="babi.filter" id="invoice_detection_subject_sii">
+            <field name="name">Invoice detection with "Subject" notice of the SII</field>
+            <field name="model" search="[('model', '=', 'account.invoice')]"/>
+            <field name="domain">[('type', 'ilike', '%out%'), ('state', 'in', ['paid', 'posted']), ('sii_records.report', '=', {Libro}), ['OR', [('sii_subjected_key', '!=', None), ('sii_excemption_key', '!=', None)], [('sii_subjected_key', '!=', None), ('sii_issued_key', '=', '02')], [('sii_excemption_key', '!=', 'E2'), ('sii_issued_key', '=', '02')], [('sii_subjected_key', '!=', None), ('sii_excemption_key', '=', 'E2')]]]</field>
+        </record>
+
+        <!-- Parameters -->
+        <record model="babi.filter.parameter" id="invoice_detection_subject_sii_book">
+            <field name="name">Libro</field>
+            <field name="ttype">integer</field>
+            <field name="filter" ref="invoice_detection_subject_sii"/>
+        </record>
+
+        <!-- Expressions -->
+        <record model="babi.expression" id="subject_invoice_amount">
+          <field name="ttype">float</field>
+          <field name="model" search="[('model','=','account.invoice')]"/>
+          <field name="expression">o.total_amount if o.type in ('out_invoice', 'in_credit_note') else -o.total_amount</field>
+          <field name="name">Total Amount</field>
+        </record>
+
+        <!-- Report -->
+        <record model="babi.report" id="subject_sii_invoice">
+            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+            <field name="model" search="[('model','=','account.invoice')]"/>
+            <field name="filter" ref="invoice_detection_subject_sii"/>
+            <field name="name">Invoice detection with "Subject" notice of the SII</field>
+            <field name="timeout" eval="1200"/>
+        </record>
+        <record model="babi.report-res.group"
+                id="subject_sii_invoice_group_babi_">
+            <field name="report" ref="subject_sii_invoice"/>
+            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        </record>
+        <record model="babi.dimension" id="subject_sii_invoice__date">
+            <field name="report" ref="subject_sii_invoice"/>
+            <field name="expression" ref="babi_reports_account_invoice.account_invoice_date"/>
+            <field name="name">Date</field>
+            <field name="sequence">1</field>
+            <field name="group_by">True</field>
+        </record>
+        <record model="babi.dimension" id="subject_sii_invoice__description">
+            <field name="report" ref="subject_sii_invoice"/>
+            <field name="expression" ref="babi_reports_account_invoice.account_invoice_self"/>
+            <field name="name">Invoice</field>
+            <field name="sequence">2</field>
+            <field name="group_by">False</field>
+        </record>
+        <record model="babi.measure" id="subject_sii_invoice_amount">
+            <field name="report" ref="subject_sii_invoice"/>
+            <field name="expression" ref="subject_invoice_amount"/>
+            <field name="name">Total Amount</field>
+            <field name="aggregate">sum</field>
+        </record>
+    </data>
+</tryton>
