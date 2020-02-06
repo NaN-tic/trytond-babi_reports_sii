@@ -5,8 +5,7 @@ from trytond.pool import PoolMeta
 __all__ = ['Model']
 
 
-class Model:
-    __metaclass__ = PoolMeta
+class Model(metaclass=PoolMeta):
     __name__ = 'ir.model'
 
     @classmethod
