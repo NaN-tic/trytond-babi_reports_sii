@@ -90,7 +90,7 @@
         <record model="babi.filter" id="issued_invoices_taxes">
             <field name="name">Tryton Issued Invoice Taxes</field>
             <field name="model" search="[('model', '=', 'account.invoice.tax')]"/>
-            <field name="domain">[('invoice.state', 'in', ['posted', 'paid']), ('invoice.type', 'in', ['out_invoice', 'out_credit_note']), ('invoice.move.period', '=', {Periodo})]</field>
+            <field name="domain">[('invoice.state', 'in', ['posted', 'paid']), ('invoice.type', '=', 'out'), ('invoice.move.period', '=', {Periodo})]</field>
         </record>
 
         <!-- Parameters -->
@@ -157,7 +157,7 @@
         <record model="babi.filter" id="received_invoices_taxes">
             <field name="name">Tryton Received Invoice Taxes</field>
             <field name="model" search="[('model', '=', 'account.invoice.tax')]"/>
-            <field name="domain">[('invoice.state', 'in', ['posted', 'paid']), ('invoice.type', 'in', ['in_invoice', 'in_credit_note']), ('invoice.move.period', '=', {Periodo})]</field>
+            <field name="domain">[('invoice.state', 'in', ['posted', 'paid']), ('invoice.type', '=', 'in'), ('invoice.move.period', '=', {Periodo})]</field>
         </record>
 
         <!-- Parameters -->
@@ -334,7 +334,7 @@
         <record model="babi.expression" id="subject_invoice_amount">
           <field name="ttype">float</field>
           <field name="model" search="[('model','=','account.invoice')]"/>
-          <field name="expression">o.total_amount if o.type in ('out_invoice', 'in_credit_note') else -o.total_amount</field>
+          <field name="expression">o.total_amount</field>
           <field name="name">Total Amount</field>
         </record>
 
