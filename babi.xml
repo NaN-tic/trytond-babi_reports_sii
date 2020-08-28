@@ -111,13 +111,13 @@
         <record model="babi.expression" id="invoice_tax_base">
           <field name="ttype">numeric</field>
           <field name="model" search="[('model','=','account.invoice.tax')]"/>
-          <field name="expression">o.base_sign * (o.base if o.invoice.currency == 24 else o.company_base)</field>
+          <field name="expression">o.base if o.invoice.currency.code == 'EUR' else o.company_base</field>
           <field name="name">Base</field>
         </record>
         <record model="babi.expression" id="invoice_tax_tax">
           <field name="ttype">numeric</field>
           <field name="model" search="[('model','=','account.invoice.tax')]"/>
-          <field name="expression">o.tax_sign * (o.amount if o.invoice.currency == 24 else o.company_amount)</field>
+          <field name="expression">o.amount if o.invoice.currency.code == 'EUR' else o.company_amount</field>
           <field name="name">Tax</field>
         </record>
 
