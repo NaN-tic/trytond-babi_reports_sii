@@ -2,7 +2,7 @@
 <!-- The COPYRIGHT file at the top level of this repository contains the full
      copyright notices and license terms. -->
 <tryton>
-    <data>
+    <data grouped="1">
         <!-- Invoices that are in the summary of the SII but its state in tryton is not correct -->
         <!-- Filters -->
         <record model="babi.filter" id="summary_invoices_not_correct_state">
