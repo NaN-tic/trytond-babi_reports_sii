@@ -8,7 +8,7 @@
         <record model="babi.filter" id="summary_invoices_not_correct_state">
             <field name="name">Invoices that are in the summary of the SII but its state in tryton is not correct</field>
             <field name="model" search="[('model', '=', 'aeat.sii.report.lines')]"/>
-            <field name="domain">[('report', '=', {Libro}), ('state', 'in', ['Correcta', 'AceptadaConErrores']), ('invoice', '!=', None), ('invoice.state', 'not in', ['posted', 'paid'])]</field>
+            <field name="domain">[('report', '=', {Libro}), ('state', 'in', ['Correcta', 'AceptadaConErrores']), ('invoice', '!=', None), ['OR', ('invoice.state', 'in', ['draft', 'validated']), [('invoice.state', '=', 'cancelled'), ('invoice.cancel_move', '=', None)]]]</field>
         </record>
 
         <!-- Parameters -->
@@ -90,7 +90,7 @@
         <record model="babi.filter" id="issued_invoices_taxes">
             <field name="name">Tryton Issued Invoice Taxes</field>
             <field name="model" search="[('model', '=', 'account.invoice.tax')]"/>
-            <field name="domain">[('invoice.state', 'in', ['posted', 'paid']), ('invoice.type', '=', 'out'), ('invoice.move.period', '=', {Periodo})]</field>
+            <field name="domain">[['OR', ('invoice.state', 'in', ['posted', 'paid']), [('invoice.state', '=', 'cancelled'), ('invoice.cancel_move', '!=', None)]], ('invoice.type', '=', 'out'), ('invoice.move.period', '=', {Periodo})]</field>
         </record>
 
         <!-- Parameters -->
