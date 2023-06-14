@@ -108,6 +108,12 @@
           <field name="expression">o.description</field>
           <field name="name">Description</field>
         </record>
+        <record model="babi.expression" id="invoice_tax_type">
+          <field name="ttype">char</field>
+          <field name="model" search="[('model','=','account.invoice.tax')]"/>
+          <field name="expression">'FACTURA' if o.base >= 0 else 'RECTIFICATIVA'</field>
+          <field name="name">Type</field>
+        </record>
         <record model="babi.expression" id="invoice_tax_base">
           <field name="ttype">numeric</field>
           <field name="model" search="[('model','=','account.invoice.tax')]"/>
@@ -138,6 +144,12 @@
             <field name="expression" ref="invoice_tax_description"/>
             <field name="name">Description</field>
             <field name="sequence">1</field>
+        </record>
+        <record model="babi.dimension" id="tryton_issued_invoices_taxes__type">
+            <field name="report" ref="tryton_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_type"/>
+            <field name="name">Type</field>
+            <field name="sequence">2</field>
         </record>
         <record model="babi.measure" id="tryton_issued_invoices_taxes_base">
             <field name="report" ref="tryton_issued_invoices_taxes"/>
@@ -187,6 +199,12 @@
             <field name="name">Description</field>
             <field name="sequence">1</field>
         </record>
+        <record model="babi.dimension" id="tryton_received_invoices_taxes__type">
+            <field name="report" ref="tryton_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_type"/>
+            <field name="name">Type</field>
+            <field name="sequence">2</field>
+        </record>
         <record model="babi.measure" id="tryton_received_invoices_taxes_base">
             <field name="report" ref="tryton_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_base"/>
@@ -222,6 +240,12 @@
           <field name="expression">o.rate</field>
           <field name="name">Description</field>
         </record>
+        <record model="babi.expression" id="invoice_tax_type_">
+          <field name="ttype">char</field>
+          <field name="model" search="[('model','=','aeat.sii.report.line.tax')]"/>
+          <field name="expression">'FACTURA' if o.base >= 0 else 'RECTIFICATIVA'</field>
+          <field name="name">Type</field>
+        </record>
         <record model="babi.expression" id="invoice_tax_base_">
           <field name="ttype">numeric</field>
           <field name="model" search="[('model','=','aeat.sii.report.line.tax')]"/>
@@ -252,6 +276,12 @@
             <field name="expression" ref="invoice_tax_description_"/>
             <field name="name">Description</field>
             <field name="sequence">1</field>
+        </record>
+        <record model="babi.dimension" id="estate_issued_invoices_taxes__type">
+            <field name="report" ref="estate_issued_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_type_"/>
+            <field name="name">Type</field>
+            <field name="sequence">2</field>
         </record>
         <record model="babi.measure" id="estate_issued_invoices_taxes_base">
             <field name="report" ref="estate_issued_invoices_taxes"/>
@@ -299,6 +329,12 @@
             <field name="expression" ref="invoice_tax_description_"/>
             <field name="name">Description</field>
             <field name="sequence">1</field>
+        </record>
+        <record model="babi.dimension" id="estate_received_invoices_taxes__type">
+            <field name="report" ref="estate_received_invoices_taxes"/>
+            <field name="expression" ref="invoice_tax_type_"/>
+            <field name="name">Type</field>
+            <field name="sequence">2</field>
         </record>
         <record model="babi.measure" id="estate_received_invoices_taxes_base">
             <field name="report" ref="estate_received_invoices_taxes"/>
