@@ -6,10 +6,18 @@ msgctxt "model:babi.dimension,name:estate_issued_invoices_taxes__description"
 msgid "Description"
 msgstr "Descripción"
 
+msgctxt "model:babi.dimension,name:estate_issued_invoices_taxes__type"
+msgid "Type"
+msgstr "Tipo"
+
 msgctxt ""
 "model:babi.dimension,name:estate_received_invoices_taxes__description"
 msgid "Description"
 msgstr "Descripción"
+
+msgctxt "model:babi.dimension,name:estate_received_invoices_taxes__type"
+msgid "Type"
+msgstr "Tipo"
 
 msgctxt "model:babi.dimension,name:subject_sii_invoice__date"
 msgid "Date"
@@ -35,10 +43,18 @@ msgctxt "model:babi.dimension,name:tryton_issued_invoices_taxes__description"
 msgid "Description"
 msgstr "Descripción"
 
+msgctxt "model:babi.dimension,name:tryton_issued_invoices_taxes__type"
+msgid "Type"
+msgstr "Tipo"
+
 msgctxt ""
 "model:babi.dimension,name:tryton_received_invoices_taxes__description"
 msgid "Description"
 msgstr "Descripción"
+
+msgctxt "model:babi.dimension,name:tryton_received_invoices_taxes__type"
+msgid "Type"
+msgstr "Tipo"
 
 msgctxt "model:babi.expression,name:invoice_amount"
 msgid "Amount"
@@ -79,6 +95,14 @@ msgstr "Impuesto"
 msgctxt "model:babi.expression,name:invoice_tax_tax_"
 msgid "Tax"
 msgstr "Impuesto"
+
+msgctxt "model:babi.expression,name:invoice_tax_type"
+msgid "Type"
+msgstr "Tipo"
+
+msgctxt "model:babi.expression,name:invoice_tax_type_"
+msgid "Type"
+msgstr "Tipo"
 
 msgctxt "model:babi.expression,name:subject_invoice_amount"
 msgid "Total Amount"
