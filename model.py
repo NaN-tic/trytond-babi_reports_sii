@@ -2,8 +2,6 @@
 # copyright notices and license terms.
 from trytond.pool import PoolMeta
 
-__all__ = ['Model']
-
 
 class Model(metaclass=PoolMeta):
     __name__ = 'ir.model'
@@ -11,7 +9,7 @@ class Model(metaclass=PoolMeta):
     @classmethod
     def __register__(cls, module_name):
         super(Model, cls).__register__(module_name)
-        models = cls.search([('model', 'in', ['account.invoice',
+        models = cls.search([('name', 'in', ['account.invoice',
                         'account.invoice.tax', 'aeat.sii.report.lines',
                         'aeat.sii.report.line.tax'])])
         if models:
