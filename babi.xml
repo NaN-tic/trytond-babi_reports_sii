@@ -44,45 +44,66 @@
           <field name="name">Invoice Number</field>
         </record>
 
-        <!-- Report -->
-        <record model="babi.report" id="summary_invoices_state">
-            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+        <!-- Table -->
+        <record model="babi.table" id="babi_table_summary_invoices_state">
+            <field name="type">model</field>
             <field name="model" search="[('name','=','aeat.sii.report.lines')]"/>
             <field name="filter" ref="summary_invoices_not_correct_state"/>
             <field name="name">Invoices that are in the summary of the SII but its state in tryton is not correct</field>
+            <field name="internal_name">ssi_invoice_summary</field>
+            <field name="preview_limit">10</field>
             <field name="timeout" eval="1200"/>
         </record>
-        <record model="babi.report-res.group" id="tryton_summary_invoices_group_babi">
-            <field name="report" ref="summary_invoices_state"/>
-            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        <record model="babi.pivot" id="babi_pivot_summary_invoices_state">
+            <field name="table" ref="babi_table_summary_invoices_state"/>
         </record>
-        <record model="babi.dimension" id="summary_invoices_state__date">
-            <field name="report" ref="summary_invoices_state"/>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state__date">
+            <field name="table" ref="babi_table_summary_invoices_state"/>
             <field name="expression" ref="invoice_date"/>
             <field name="name">Invoice Date</field>
-            <field name="sequence">1</field>
-            <field name="group_by">True</field>
+            <field name="internal_name">invoice_date</field>
         </record>
-        <record model="babi.dimension" id="summary_invoices_state__state">
-            <field name="report" ref="summary_invoices_state"/>
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state__date">
+            <field name="pivot" ref="babi_pivot_summary_invoices_state"/>
+            <field name="field" ref="babi_field_summary_invoices_state__date"/>
+            <field name="sequence">1</field>
+        </record>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state__state">
+            <field name="table" ref="babi_table_summary_invoices_state"/>
             <field name="expression" ref="invoice_state"/>
             <field name="name">Invoice State</field>
-            <field name="sequence">2</field>
-            <field name="group_by">True</field>
+            <field name="internal_name">invoice_state</field>
         </record>
-        <record model="babi.dimension" id="summary_invoices_state__number">
-            <field name="report" ref="summary_invoices_state"/>
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state__state">
+            <field name="pivot" ref="babi_pivot_summary_invoices_state"/>
+            <field name="field" ref="babi_field_summary_invoices_state__state"/>
+            <field name="sequence">2</field>
+        </record>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state__number">
+          <field name="table" ref="babi_table_summary_invoices_state"/>
             <field name="expression" ref="invoice_number"/>
             <field name="name">Invoice Number</field>
-            <field name="sequence">3</field>
-            <field name="group_by">False</field>
+            <field name="internal_name">invoice_number</field>
         </record>
-        <record model="babi.measure" id="summary_invoices_state_amount">
-            <field name="report" ref="summary_invoices_state"/>
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state__number">
+            <field name="pivot" ref="babi_pivot_summary_invoices_state"/>
+            <field name="field" ref="babi_field_summary_invoices_state__number"/>
+            <field name="sequence">3</field>
+        </record>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state_amount">
+            <field name="table" ref="babi_table_summary_invoices_state"/>
             <field name="expression" ref="invoice_amount"/>
             <field name="name">Amount</field>
+            <field name="internal_name">amount</field>
+        </record>
+        <record model="babi.pivot.measure" id="summary_invoices_state_amount">
+            <field name="pivot" ref="babi_pivot_summary_invoices_state"/>
+            <field name="field" ref="babi_field_summary_invoices_state_amount"/>
             <field name="aggregate">sum</field>
-            <field name="sequence">5</field>
         </record>
 
         <!-- 5 - Tryton Issued Invoice Taxes -->
@@ -127,40 +148,64 @@
           <field name="name">Tax</field>
         </record>
 
-        <!-- Report -->
-        <record model="babi.report" id="tryton_issued_invoices_taxes">
-            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+        <!-- Table -->
+        <record model="babi.table" id="babi_table_issued_invoices_taxes">
+            <field name="type">model</field>
             <field name="model" search="[('name','=','account.invoice.tax')]"/>
             <field name="filter" ref="issued_invoices_taxes"/>
-            <field name="name">Tryton Issued Invoice Taxes</field>
+            <field name="name">SII Issued Invoice Taxes</field>
+            <field name="internal_name">ssi_issued_invoice_taxes</field>
             <field name="timeout" eval="1200"/>
         </record>
-        <record model="babi.report-res.group" id="tryton_issued_invoices_taxes_group_babi">
-            <field name="report" ref="tryton_issued_invoices_taxes"/>
-            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        <record model="babi.pivot" id="babi_pivot_issued_invoices_taxes">
+            <field name="table" ref="babi_table_issued_invoices_taxes"/>
         </record>
-        <record model="babi.dimension" id="tryton_issued_invoices_taxes__description">
-            <field name="report" ref="tryton_issued_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_issued_invoices_taxes__description">
+            <field name="table" ref="babi_table_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description"/>
             <field name="name">Description</field>
+            <field name="internal_name">description</field>
+        </record>
+        <record model="babi.pivot.row_dimension" id="issued_invoices_taxes__description">
+            <field name="pivot" ref="babi_pivot_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_issued_invoices_taxes__description"/>
             <field name="sequence">1</field>
         </record>
-        <record model="babi.dimension" id="tryton_issued_invoices_taxes__type">
-            <field name="report" ref="tryton_issued_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_issued_invoices_taxes__type">
+            <field name="table" ref="babi_table_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type"/>
             <field name="name">Type</field>
+            <field name="internal_name">type</field>
+        </record>
+        <record model="babi.pivot.row_dimension" id="issued_invoices_taxes__type">
+            <field name="pivot" ref="babi_pivot_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_issued_invoices_taxes__type"/>
             <field name="sequence">2</field>
         </record>
-        <record model="babi.measure" id="tryton_issued_invoices_taxes_base">
-            <field name="report" ref="tryton_issued_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_issued_invoices_taxes_base">
+            <field name="table" ref="babi_table_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_base"/>
             <field name="name">Base</field>
+            <field name="internal_name">base</field>
+        </record>
+        <record model="babi.pivot.measure" id="issued_invoices_taxes_base">
+            <field name="pivot" ref="babi_pivot_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_issued_invoices_taxes_base"/>
             <field name="aggregate">sum</field>
         </record>
-        <record model="babi.measure" id="tryton_issued_invoices_taxes_tax">
-            <field name="report" ref="tryton_issued_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_issued_invoices_taxes_tax">
+            <field name="table" ref="babi_table_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_tax"/>
             <field name="name">Tax</field>
+            <field name="internal_name">tax</field>
+        </record>
+        <record model="babi.pivot.measure" id="issued_invoices_taxes_tax">
+            <field name="pivot" ref="babi_pivot_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_issued_invoices_taxes_tax"/>
             <field name="aggregate">sum</field>
         </record>
 
@@ -180,41 +225,64 @@
             <field name="related_model" search="[('name', '=', 'account.period')]"/>
         </record>
 
-        <!-- Report -->
-        <record model="babi.report" id="tryton_received_invoices_taxes">
-            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+        <!-- Table -->
+        <record model="babi.table" id="babi_table_received_invoices_taxes">
+            <field name="type">model</field>
             <field name="model" search="[('name','=','account.invoice.tax')]"/>
             <field name="filter" ref="received_invoices_taxes"/>
-            <field name="name">Tryton Received Invoice Taxes</field>
+            <field name="name">SII Received Invoice Taxes</field>
+            <field name="internal_name">ssi_received_invoice_taxes</field>
             <field name="timeout" eval="1200"/>
         </record>
-        <record model="babi.report-res.group"
-                id="tryton_received_invoices_taxes_group_babi">
-            <field name="report" ref="tryton_received_invoices_taxes"/>
-            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        <record model="babi.pivot" id="babi_pivot_received_invoices_taxes">
+            <field name="table" ref="babi_table_received_invoices_taxes"/>
         </record>
-        <record model="babi.dimension" id="tryton_received_invoices_taxes__description">
-            <field name="report" ref="tryton_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state__description">
+            <field name="table" ref="babi_table_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description"/>
             <field name="name">Description</field>
+            <field name="internal_name">description</field>
+        </record>
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state__description">
+            <field name="pivot" ref="babi_pivot_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_summary_invoices_state__description"/>
             <field name="sequence">1</field>
         </record>
-        <record model="babi.dimension" id="tryton_received_invoices_taxes__type">
-            <field name="report" ref="tryton_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state__type">
+            <field name="table" ref="babi_table_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type"/>
             <field name="name">Type</field>
+            <field name="internal_name">type</field>
+        </record>
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state__type">
+            <field name="pivot" ref="babi_pivot_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_summary_invoices_state__type"/>
             <field name="sequence">2</field>
         </record>
-        <record model="babi.measure" id="tryton_received_invoices_taxes_base">
-            <field name="report" ref="tryton_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state_base">
+            <field name="table" ref="babi_table_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_base"/>
             <field name="name">Base</field>
+            <field name="internal_name">base</field>
+        </record>
+        <record model="babi.pivot.measure" id="summary_invoices_state_base">
+            <field name="pivot" ref="babi_pivot_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_summary_invoices_state_base"/>
             <field name="aggregate">sum</field>
         </record>
-        <record model="babi.measure" id="tryton_received_invoices_taxes_tax">
-            <field name="report" ref="tryton_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_summary_invoices_state_tax">
+            <field name="table" ref="babi_table_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_tax"/>
             <field name="name">Tax</field>
+            <field name="internal_name">tax</field>
+        </record>
+        <record model="babi.pivot.measure" id="summary_invoices_state_tax">
+            <field name="pivot" ref="babi_pivot_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_summary_invoices_state_tax"/>
             <field name="aggregate">sum</field>
         </record>
 
@@ -259,40 +327,64 @@
           <field name="name">Tax</field>
         </record>
 
-        <!-- Report -->
-        <record model="babi.report" id="estate_issued_invoices_taxes">
-            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+        <!-- Table -->
+        <record model="babi.table" id="babi_table_state_issued_invoices_taxes">
+            <field name="type">model</field>
             <field name="model" search="[('name','=','aeat.sii.report.line.tax')]"/>
             <field name="filter" ref="issued_invoices_taxes_estate"/>
-            <field name="name">Estate Issued Invoice Taxes</field>
+            <field name="name">SII State Issued Invoice Taxes</field>
+            <field name="internal_name">sii_state_issued_invoice_taxes</field>
             <field name="timeout" eval="1200"/>
         </record>
-        <record model="babi.report-res.group" id="estate_received_invoices_taxes_group_babi">
-            <field name="report" ref="estate_issued_invoices_taxes"/>
-            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        <record model="babi.pivot" id="babi_pivot_state_issued_invoices_taxes">
+            <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
         </record>
-        <record model="babi.dimension" id="estate_issued_invoices_taxes__description">
-            <field name="report" ref="estate_issued_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_state_issued_invoices_taxes__description">
+            <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description_"/>
             <field name="name">Description</field>
+            <field name="internal_name">description</field>
+        </record>
+        <record model="babi.pivot.row_dimension" id="state_issued_invoices_taxes__description">
+            <field name="pivot" ref="babi_pivot_state_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_issued_invoices_taxes__description"/>
             <field name="sequence">1</field>
         </record>
-        <record model="babi.dimension" id="estate_issued_invoices_taxes__type">
-            <field name="report" ref="estate_issued_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_state_issued_invoices_taxes__type">
+            <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type_"/>
             <field name="name">Type</field>
-            <field name="sequence">2</field>
+            <field name="internal_name">type</field>
         </record>
-        <record model="babi.measure" id="estate_issued_invoices_taxes_base">
-            <field name="report" ref="estate_issued_invoices_taxes"/>
+        <record model="babi.pivot.row_dimension" id="state_issued_invoices_taxes__type">
+            <field name="pivot" ref="babi_pivot_state_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_issued_invoices_taxes__type"/>
+            <field name="sequence">1</field>
+        </record>
+
+        <record model="babi.field" id="babi_field_state_issued_invoices_taxes_base">
+            <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_base_"/>
             <field name="name">Base</field>
+            <field name="internal_name">base</field>
+        </record>
+        <record model="babi.pivot.measure" id="state_issued_invoices_taxes_base">
+            <field name="pivot" ref="babi_pivot_state_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_issued_invoices_taxes_base"/>
             <field name="aggregate">sum</field>
         </record>
-        <record model="babi.measure" id="estate_issued_invoices_taxes_tax">
-            <field name="report" ref="estate_issued_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_state_issued_invoices_taxes_tax">
+            <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_tax_"/>
             <field name="name">Tax</field>
+            <field name="internal_name">tax</field>
+        </record>
+        <record model="babi.pivot.measure" id="state_issued_invoices_taxes_tax">
+            <field name="pivot" ref="babi_pivot_state_issued_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_issued_invoices_taxes_tax"/>
             <field name="aggregate">sum</field>
         </record>
 
@@ -312,40 +404,63 @@
         </record>
 
         <!-- Report-->
-        <record model="babi.report" id="estate_received_invoices_taxes">
-            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+        <record model="babi.table" id="babi_table_state_received_invoices_taxes">
+            <field name="type">model</field>
             <field name="model" search="[('name','=','aeat.sii.report.line.tax')]"/>
             <field name="filter" ref="received_invoices_taxes_estate"/>
-            <field name="name">Estate Received Invoice Taxes</field>
+            <field name="name">SII State Received Invoice Taxes</field>
+            <field name="internal_name">ssi_state_received_invoices_taxes</field>
             <field name="timeout" eval="1200"/>
         </record>
-        <record model="babi.report-res.group"
-                id="estate_received_invoices_taxes_group_babi_">
-            <field name="report" ref="estate_received_invoices_taxes"/>
-            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        <record model="babi.pivot" id="babi_pivot_state_received_invoices_taxes">
+            <field name="table" ref="babi_table_state_received_invoices_taxes"/>
         </record>
-        <record model="babi.dimension" id="estate_received_invoices_taxes__description">
-            <field name="report" ref="estate_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_state_received_invoices_taxes__description">
+            <field name="table" ref="babi_table_state_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description_"/>
             <field name="name">Description</field>
+            <field name="internal_name">description</field>
+        </record>
+        <record model="babi.pivot.row_dimension" id="state_received_invoices_taxes__description">
+            <field name="pivot" ref="babi_pivot_state_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_received_invoices_taxes__description"/>
             <field name="sequence">1</field>
         </record>
-        <record model="babi.dimension" id="estate_received_invoices_taxes__type">
-            <field name="report" ref="estate_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_state_received_invoices_taxes__type">
+            <field name="table" ref="babi_table_state_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type_"/>
             <field name="name">Type</field>
+            <field name="internal_name">type</field>
+        </record>
+        <record model="babi.pivot.row_dimension" id="state_received_invoices_taxes__type">
+            <field name="pivot" ref="babi_pivot_state_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_received_invoices_taxes__type"/>
             <field name="sequence">2</field>
         </record>
-        <record model="babi.measure" id="estate_received_invoices_taxes_base">
-            <field name="report" ref="estate_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_state_received_invoices_taxes_base">
+            <field name="table" ref="babi_table_state_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_base_"/>
             <field name="name">Base</field>
+            <field name="internal_name">base</field>
+        </record>
+        <record model="babi.pivot.measure" id="state_received_invoices_taxes_base">
+            <field name="pivot" ref="babi_pivot_state_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_received_invoices_taxes_base"/>
             <field name="aggregate">sum</field>
         </record>
-        <record model="babi.measure" id="estate_received_invoices_taxes_tax">
-            <field name="report" ref="estate_received_invoices_taxes"/>
+
+        <record model="babi.field" id="babi_field_state_received_invoices_taxes_tax">
+            <field name="table" ref="babi_table_state_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_tax_"/>
             <field name="name">Tax</field>
+            <field name="internal_name">tax</field>
+        </record>
+        <record model="babi.pivot.measure" id="state_received_invoices_taxes_tax">
+            <field name="pivot" ref="babi_pivot_state_received_invoices_taxes"/>
+            <field name="field" ref="babi_field_state_received_invoices_taxes_tax"/>
             <field name="aggregate">sum</field>
         </record>
     </data>
@@ -374,37 +489,52 @@
           <field name="name">Total Amount</field>
         </record>
 
-        <!-- Report -->
-        <record model="babi.report" id="subject_sii_invoice">
-            <field name="parent_menu" ref="aeat_sii.menu_aeat_sii_report_menu"/>
+        <!-- Table -->
+        <record model="babi.table" id="babi_table_subject_sii_invoice">
+            <field name="type">model</field>
             <field name="model" search="[('name','=','account.invoice')]"/>
             <field name="filter" ref="invoice_detection_subject_sii"/>
             <field name="name">Invoice detection with "Subject" notice of the SII</field>
+            <field name="internal_name">sii_invoice_detection_with_subject_notice</field>
             <field name="timeout" eval="1200"/>
         </record>
-        <record model="babi.report-res.group"
-                id="subject_sii_invoice_group_babi_">
-            <field name="report" ref="subject_sii_invoice"/>
-            <field name="group" ref="aeat_sii.group_aeat_sii_admin"/>
+        <record model="babi.pivot" id="babi_pivot_subject_sii_invoice">
+            <field name="table" ref="babi_table_subject_sii_invoice"/>
         </record>
-        <record model="babi.dimension" id="subject_sii_invoice__date">
-            <field name="report" ref="subject_sii_invoice"/>
+
+        <record model="babi.field" id="babi_field_subject_sii_invoice__date">
+            <field name="table" ref="babi_table_subject_sii_invoice"/>
             <field name="expression" ref="babi_reports_account_invoice.account_invoice_date"/>
             <field name="name">Date</field>
-            <field name="sequence">1</field>
-            <field name="group_by">True</field>
+            <field name="internal_name">date</field>
         </record>
-        <record model="babi.dimension" id="subject_sii_invoice__description">
-            <field name="report" ref="subject_sii_invoice"/>
+        <record model="babi.pivot.row_dimension" id="subject_sii_invoice__date">
+            <field name="pivot" ref="babi_pivot_subject_sii_invoice"/>
+            <field name="field" ref="babi_field_subject_sii_invoice__date"/>
+            <field name="sequence">1</field>
+        </record>
+
+        <record model="babi.field" id="babi_field_subject_sii_invoice__description">
+            <field name="table" ref="babi_table_subject_sii_invoice"/>
             <field name="expression" ref="babi_reports_account_invoice.account_invoice_self"/>
             <field name="name">Invoice</field>
-            <field name="sequence">2</field>
-            <field name="group_by">False</field>
+            <field name="internal_name">invoice</field>
         </record>
-        <record model="babi.measure" id="subject_sii_invoice_amount">
-            <field name="report" ref="subject_sii_invoice"/>
+        <record model="babi.pivot.row_dimension" id="subject_sii_invoice__description">
+            <field name="pivot" ref="babi_pivot_subject_sii_invoice"/>
+            <field name="field" ref="babi_field_subject_sii_invoice__description"/>
+            <field name="sequence">1</field>
+        </record>
+
+        <record model="babi.field" id="babi_field_subject_sii_invoice_amount">
+            <field name="table" ref="babi_table_subject_sii_invoice"/>
             <field name="expression" ref="subject_invoice_amount"/>
             <field name="name">Total Amount</field>
+            <field name="internal_name">total_amount</field>
+        </record>
+        <record model="babi.pivot.measure" id="subject_sii_invoice_amount">
+            <field name="pivot" ref="babi_pivot_subject_sii_invoice"/>
+            <field name="field" ref="babi_field_subject_sii_invoice_amount"/>
             <field name="aggregate">sum</field>
         </record>
     </data>
