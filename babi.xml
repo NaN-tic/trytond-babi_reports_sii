@@ -58,39 +58,39 @@
             <field name="table" ref="babi_table_summary_invoices_state"/>
         </record>
 
-        <record model="babi.field" id="babi_field_summary_invoices_state__date">
+        <record model="babi.field" id="babi_field_summary_invoices_state_date">
             <field name="table" ref="babi_table_summary_invoices_state"/>
             <field name="expression" ref="invoice_date"/>
             <field name="name">Invoice Date</field>
             <field name="internal_name">invoice_date</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="summary_invoices_state__date">
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state_date">
             <field name="pivot" ref="babi_pivot_summary_invoices_state"/>
-            <field name="field" ref="babi_field_summary_invoices_state__date"/>
+            <field name="field" ref="babi_field_summary_invoices_state_date"/>
             <field name="sequence">1</field>
         </record>
 
-        <record model="babi.field" id="babi_field_summary_invoices_state__state">
+        <record model="babi.field" id="babi_field_summary_invoices_state_state">
             <field name="table" ref="babi_table_summary_invoices_state"/>
             <field name="expression" ref="invoice_state"/>
             <field name="name">Invoice State</field>
             <field name="internal_name">invoice_state</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="summary_invoices_state__state">
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state_state">
             <field name="pivot" ref="babi_pivot_summary_invoices_state"/>
-            <field name="field" ref="babi_field_summary_invoices_state__state"/>
+            <field name="field" ref="babi_field_summary_invoices_state_state"/>
             <field name="sequence">2</field>
         </record>
 
-        <record model="babi.field" id="babi_field_summary_invoices_state__number">
+        <record model="babi.field" id="babi_field_summary_invoices_state_number">
           <field name="table" ref="babi_table_summary_invoices_state"/>
             <field name="expression" ref="invoice_number"/>
             <field name="name">Invoice Number</field>
             <field name="internal_name">invoice_number</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="summary_invoices_state__number">
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state_number">
             <field name="pivot" ref="babi_pivot_summary_invoices_state"/>
-            <field name="field" ref="babi_field_summary_invoices_state__number"/>
+            <field name="field" ref="babi_field_summary_invoices_state_number"/>
             <field name="sequence">3</field>
         </record>
 
@@ -161,27 +161,27 @@
             <field name="table" ref="babi_table_issued_invoices_taxes"/>
         </record>
 
-        <record model="babi.field" id="babi_field_issued_invoices_taxes__description">
+        <record model="babi.field" id="babi_field_issued_invoices_taxes_description">
             <field name="table" ref="babi_table_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description"/>
             <field name="name">Description</field>
             <field name="internal_name">description</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="issued_invoices_taxes__description">
+        <record model="babi.pivot.row_dimension" id="issued_invoices_taxes_description">
             <field name="pivot" ref="babi_pivot_issued_invoices_taxes"/>
-            <field name="field" ref="babi_field_issued_invoices_taxes__description"/>
+            <field name="field" ref="babi_field_issued_invoices_taxes_description"/>
             <field name="sequence">1</field>
         </record>
 
-        <record model="babi.field" id="babi_field_issued_invoices_taxes__type">
+        <record model="babi.field" id="babi_field_issued_invoices_taxes_type">
             <field name="table" ref="babi_table_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type"/>
             <field name="name">Type</field>
             <field name="internal_name">type</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="issued_invoices_taxes__type">
+        <record model="babi.pivot.row_dimension" id="issued_invoices_taxes_type">
             <field name="pivot" ref="babi_pivot_issued_invoices_taxes"/>
-            <field name="field" ref="babi_field_issued_invoices_taxes__type"/>
+            <field name="field" ref="babi_field_issued_invoices_taxes_type"/>
             <field name="sequence">2</field>
         </record>
 
@@ -238,27 +238,27 @@
             <field name="table" ref="babi_table_received_invoices_taxes"/>
         </record>
 
-        <record model="babi.field" id="babi_field_summary_invoices_state__description">
+        <record model="babi.field" id="babi_field_summary_invoices_state_description">
             <field name="table" ref="babi_table_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description"/>
             <field name="name">Description</field>
             <field name="internal_name">description</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="summary_invoices_state__description">
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state_description">
             <field name="pivot" ref="babi_pivot_received_invoices_taxes"/>
-            <field name="field" ref="babi_field_summary_invoices_state__description"/>
+            <field name="field" ref="babi_field_summary_invoices_state_description"/>
             <field name="sequence">1</field>
         </record>
 
-        <record model="babi.field" id="babi_field_summary_invoices_state__type">
+        <record model="babi.field" id="babi_field_summary_invoices_state_type">
             <field name="table" ref="babi_table_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type"/>
             <field name="name">Type</field>
             <field name="internal_name">type</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="summary_invoices_state__type">
+        <record model="babi.pivot.row_dimension" id="summary_invoices_state_type">
             <field name="pivot" ref="babi_pivot_received_invoices_taxes"/>
-            <field name="field" ref="babi_field_summary_invoices_state__type"/>
+            <field name="field" ref="babi_field_summary_invoices_state_type"/>
             <field name="sequence">2</field>
         </record>
 
@@ -340,27 +340,27 @@
             <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
         </record>
 
-        <record model="babi.field" id="babi_field_state_issued_invoices_taxes__description">
+        <record model="babi.field" id="babi_field_state_issued_invoices_taxes_description">
             <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description_"/>
             <field name="name">Description</field>
             <field name="internal_name">description</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="state_issued_invoices_taxes__description">
+        <record model="babi.pivot.row_dimension" id="state_issued_invoices_taxes_description">
             <field name="pivot" ref="babi_pivot_state_issued_invoices_taxes"/>
-            <field name="field" ref="babi_field_state_issued_invoices_taxes__description"/>
+            <field name="field" ref="babi_field_state_issued_invoices_taxes_description"/>
             <field name="sequence">1</field>
         </record>
 
-        <record model="babi.field" id="babi_field_state_issued_invoices_taxes__type">
+        <record model="babi.field" id="babi_field_state_issued_invoices_taxes_type">
             <field name="table" ref="babi_table_state_issued_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type_"/>
             <field name="name">Type</field>
             <field name="internal_name">type</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="state_issued_invoices_taxes__type">
+        <record model="babi.pivot.row_dimension" id="state_issued_invoices_taxes_type">
             <field name="pivot" ref="babi_pivot_state_issued_invoices_taxes"/>
-            <field name="field" ref="babi_field_state_issued_invoices_taxes__type"/>
+            <field name="field" ref="babi_field_state_issued_invoices_taxes_type"/>
             <field name="sequence">1</field>
         </record>
 
@@ -416,27 +416,27 @@
             <field name="table" ref="babi_table_state_received_invoices_taxes"/>
         </record>
 
-        <record model="babi.field" id="babi_field_state_received_invoices_taxes__description">
+        <record model="babi.field" id="babi_field_state_received_invoices_taxes_description">
             <field name="table" ref="babi_table_state_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_description_"/>
             <field name="name">Description</field>
             <field name="internal_name">description</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="state_received_invoices_taxes__description">
+        <record model="babi.pivot.row_dimension" id="state_received_invoices_taxes_description">
             <field name="pivot" ref="babi_pivot_state_received_invoices_taxes"/>
-            <field name="field" ref="babi_field_state_received_invoices_taxes__description"/>
+            <field name="field" ref="babi_field_state_received_invoices_taxes_description"/>
             <field name="sequence">1</field>
         </record>
 
-        <record model="babi.field" id="babi_field_state_received_invoices_taxes__type">
+        <record model="babi.field" id="babi_field_state_received_invoices_taxes_type">
             <field name="table" ref="babi_table_state_received_invoices_taxes"/>
             <field name="expression" ref="invoice_tax_type_"/>
             <field name="name">Type</field>
             <field name="internal_name">type</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="state_received_invoices_taxes__type">
+        <record model="babi.pivot.row_dimension" id="state_received_invoices_taxes_type">
             <field name="pivot" ref="babi_pivot_state_received_invoices_taxes"/>
-            <field name="field" ref="babi_field_state_received_invoices_taxes__type"/>
+            <field name="field" ref="babi_field_state_received_invoices_taxes_type"/>
             <field name="sequence">2</field>
         </record>
 
@@ -502,27 +502,27 @@
             <field name="table" ref="babi_table_subject_sii_invoice"/>
         </record>
 
-        <record model="babi.field" id="babi_field_subject_sii_invoice__date">
+        <record model="babi.field" id="babi_field_subject_sii_invoice_date">
             <field name="table" ref="babi_table_subject_sii_invoice"/>
             <field name="expression" ref="babi_reports_account_invoice.account_invoice_date"/>
             <field name="name">Date</field>
             <field name="internal_name">date</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="subject_sii_invoice__date">
+        <record model="babi.pivot.row_dimension" id="subject_sii_invoice_date">
             <field name="pivot" ref="babi_pivot_subject_sii_invoice"/>
-            <field name="field" ref="babi_field_subject_sii_invoice__date"/>
+            <field name="field" ref="babi_field_subject_sii_invoice_date"/>
             <field name="sequence">1</field>
         </record>
 
-        <record model="babi.field" id="babi_field_subject_sii_invoice__description">
+        <record model="babi.field" id="babi_field_subject_sii_invoice_description">
             <field name="table" ref="babi_table_subject_sii_invoice"/>
             <field name="expression" ref="babi_reports_account_invoice.account_invoice_self"/>
             <field name="name">Invoice</field>
             <field name="internal_name">invoice</field>
         </record>
-        <record model="babi.pivot.row_dimension" id="subject_sii_invoice__description">
+        <record model="babi.pivot.row_dimension" id="subject_sii_invoice_description">
             <field name="pivot" ref="babi_pivot_subject_sii_invoice"/>
-            <field name="field" ref="babi_field_subject_sii_invoice__description"/>
+            <field name="field" ref="babi_field_subject_sii_invoice_description"/>
             <field name="sequence">1</field>
         </record>
 
