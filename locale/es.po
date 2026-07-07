@@ -47,11 +47,6 @@ msgctxt "model:babi.dimension,name:tryton_issued_invoices_taxes__type"
 msgid "Type"
 msgstr "Tipo"
 
-msgctxt ""
-"model:babi.dimension,name:tryton_received_invoices_taxes__description"
-msgid "Description"
-msgstr "Descripción"
-
 msgctxt "model:babi.dimension,name:tryton_received_invoices_taxes__type"
 msgid "Type"
 msgstr "Tipo"
