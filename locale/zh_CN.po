@@ -1,0 +1,225 @@
+#
+msgid ""
+msgstr ""
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "model:babi.dimension,name:estate_issued_invoices_taxes__description"
+msgid "Description"
+msgstr "描述"
+
+msgctxt "model:babi.dimension,name:estate_issued_invoices_taxes__type"
+msgid "Type"
+msgstr "科目"
+
+msgctxt ""
+"model:babi.dimension,name:estate_received_invoices_taxes__description"
+msgid "Description"
+msgstr "描述"
+
+msgctxt "model:babi.dimension,name:estate_received_invoices_taxes__type"
+msgid "Type"
+msgstr "科目"
+
+msgctxt "model:babi.dimension,name:subject_sii_invoice__date"
+msgid "Date"
+msgstr "日期"
+
+msgctxt "model:babi.dimension,name:subject_sii_invoice__description"
+msgid "Invoice"
+msgstr "原始凭证"
+
+msgctxt "model:babi.dimension,name:summary_invoices_state__date"
+msgid "Invoice Date"
+msgstr "发票日期"
+
+msgctxt "model:babi.dimension,name:summary_invoices_state__number"
+msgid "Invoice Number"
+msgstr "发票编号"
+
+msgctxt "model:babi.dimension,name:summary_invoices_state__state"
+msgid "Invoice State"
+msgstr "原始凭证状态"
+
+msgctxt "model:babi.dimension,name:tryton_issued_invoices_taxes__description"
+msgid "Description"
+msgstr "描述"
+
+msgctxt "model:babi.dimension,name:tryton_issued_invoices_taxes__type"
+msgid "Type"
+msgstr "科目"
+
+msgctxt "model:babi.dimension,name:tryton_received_invoices_taxes__type"
+msgid "Type"
+msgstr "科目"
+
+msgctxt "model:babi.expression,name:invoice_amount"
+msgid "Amount"
+msgstr "数额"
+
+msgctxt "model:babi.expression,name:invoice_date"
+msgid "Invoice Date"
+msgstr "发票日期"
+
+msgctxt "model:babi.expression,name:invoice_number"
+msgid "Invoice Number"
+msgstr "发票编号"
+
+msgctxt "model:babi.expression,name:invoice_state"
+msgid "Invoice State"
+msgstr "原始凭证状态"
+
+msgctxt "model:babi.expression,name:invoice_tax_base"
+msgid "Base"
+msgstr "基数"
+
+msgctxt "model:babi.expression,name:invoice_tax_base_"
+msgid "Base"
+msgstr "基数"
+
+msgctxt "model:babi.expression,name:invoice_tax_description"
+msgid "Description"
+msgstr "描述"
+
+msgctxt "model:babi.expression,name:invoice_tax_description_"
+msgid "Description"
+msgstr "描述"
+
+msgctxt "model:babi.expression,name:invoice_tax_tax"
+msgid "Tax"
+msgstr "税"
+
+msgctxt "model:babi.expression,name:invoice_tax_tax_"
+msgid "Tax"
+msgstr "税"
+
+msgctxt "model:babi.expression,name:invoice_tax_type"
+msgid "Type"
+msgstr "科目"
+
+msgctxt "model:babi.expression,name:invoice_tax_type_"
+msgid "Type"
+msgstr "科目"
+
+msgctxt "model:babi.expression,name:subject_invoice_amount"
+msgid "Total Amount"
+msgstr "总额"
+
+msgctxt "model:babi.filter,name:invoice_detection_subject_sii"
+msgid "Invoice detection with \"Subject\" notice of the SII"
+msgstr "检测带有 SII“应税”提示的发票"
+
+msgctxt "model:babi.filter,name:issued_invoices_taxes"
+msgid "Tryton Issued Invoice Taxes"
+msgstr "Tryton 销项发票税额"
+
+msgctxt "model:babi.filter,name:issued_invoices_taxes_estate"
+msgid "Estate Issued Invoice Taxes"
+msgstr "税务机关销项发票税额"
+
+msgctxt "model:babi.filter,name:received_invoices_taxes"
+msgid "Tryton Received Invoice Taxes"
+msgstr "Tryton 进项发票税额"
+
+msgctxt "model:babi.filter,name:received_invoices_taxes_estate"
+msgid "Estate Received Invoice Taxes"
+msgstr "税务机关进项发票税额"
+
+msgctxt "model:babi.filter,name:summary_invoices_not_correct_state"
+msgid ""
+"Invoices that are in the summary of the SII but its state in tryton is not "
+"correct"
+msgstr "已列入 SII 汇总但在 Tryton 中状态不正确的发票"
+
+msgctxt "model:babi.filter.parameter,name:invoice_detection_subject_sii_book"
+msgid "Libro"
+msgstr "账簿"
+
+msgctxt "model:babi.filter.parameter,name:issued_invoices_taxes_book"
+msgid "Libro"
+msgstr "账簿"
+
+msgctxt "model:babi.filter.parameter,name:issued_invoices_taxes_period"
+msgid "Periodo"
+msgstr "期间"
+
+msgctxt "model:babi.filter.parameter,name:received_invoices_taxes_book"
+msgid "Libro"
+msgstr "账簿"
+
+msgctxt "model:babi.filter.parameter,name:received_invoices_taxes_period"
+msgid "Periodo"
+msgstr "期间"
+
+msgctxt "model:babi.filter.parameter,name:summary_book"
+msgid "Libro"
+msgstr "账簿"
+
+msgctxt "model:babi.measure,name:estate_issued_invoices_taxes_base"
+msgid "Base"
+msgstr "基数"
+
+msgctxt "model:babi.measure,name:estate_issued_invoices_taxes_tax"
+msgid "Tax"
+msgstr "税"
+
+msgctxt "model:babi.measure,name:estate_received_invoices_taxes_base"
+msgid "Base"
+msgstr "基数"
+
+msgctxt "model:babi.measure,name:estate_received_invoices_taxes_tax"
+msgid "Tax"
+msgstr "税"
+
+msgctxt "model:babi.measure,name:subject_sii_invoice_amount"
+msgid "Total Amount"
+msgstr "总额"
+
+msgctxt "model:babi.measure,name:summary_invoices_state_amount"
+msgid "Amount"
+msgstr "数额"
+
+msgctxt "model:babi.measure,name:tryton_issued_invoices_taxes_base"
+msgid "Base"
+msgstr "基数"
+
+msgctxt "model:babi.measure,name:tryton_issued_invoices_taxes_tax"
+msgid "Tax"
+msgstr "税"
+
+msgctxt "model:babi.measure,name:tryton_received_invoices_taxes_base"
+msgid "Base"
+msgstr "基数"
+
+msgctxt "model:babi.measure,name:tryton_received_invoices_taxes_tax"
+msgid "Tax"
+msgstr "税"
+
+msgctxt "model:babi.report,name:estate_issued_invoices_taxes"
+msgid "Estate Issued Invoice Taxes"
+msgstr "税务机关销项发票税额"
+
+msgctxt "model:babi.report,name:estate_received_invoices_taxes"
+msgid "Estate Received Invoice Taxes"
+msgstr "税务机关进项发票税额"
+
+msgctxt "model:babi.report,name:subject_sii_invoice"
+msgid "Invoice detection with \"Subject\" notice of the SII"
+msgstr "检测带有 SII“应税”提示的发票"
+
+msgctxt "model:babi.report,name:summary_invoices_state"
+msgid ""
+"Invoices that are in the summary of the SII but its state in tryton is not "
+"correct"
+msgstr "已列入 SII 汇总但在 Tryton 中状态不正确的发票"
+
+msgctxt "model:babi.report,name:tryton_issued_invoices_taxes"
+msgid "Tryton Issued Invoice Taxes"
+msgstr "Tryton 销项发票税额"
+
+msgctxt "model:babi.report,name:tryton_received_invoices_taxes"
+msgid "Tryton Received Invoice Taxes"
+msgstr "Tryton 进项发票税额"
